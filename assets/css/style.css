@@ -1,0 +1,233 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Хедер */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+header h1 i {
+    margin-right: 10px;
+    font-size: 2rem; /* Размер иконки */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+nav ul li a:hover {
+    color: #ff6600; /* Цвет ссылки при наведении */
+}
+
+#hero {
+    background: url('../images/hero.jpg') no-repeat center center/cover;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+#hero h2, #hero p {
+    color: black;
+    text-shadow: 4px 4px 7px rgba(255, 255, 255, 0.7); 
+}
+
+
+
+.btn {
+    background-color: #ff6600;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #e55d00;
+}
+
+/* Секции */
+section {
+    padding: 50px 0;
+}
+
+#about, #pricing, #contact {
+    background-color: #f4f4f4;
+}
+
+#contact {
+    background-color: #f9f9f9;
+}
+
+/* Контейнер */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Форма расчета */
+#pricing form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#pricing label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+#pricing input, #pricing select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#pricing button {
+    padding: 10px 20px;
+}
+
+/* Модальное окно */
+.modal-content {
+    border-radius: 10px;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-body .form-group {
+    margin-bottom: 15px;
+}
+
+.modal-body .btn {
+    margin-top: 10px;
+}
+
+/* Флот */
+.fleet-item {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Футер */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Таблица */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+table th {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+
+
+    #pricing form {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    header h1 {
+        font-size: 1.2rem;
+    }
+
+
+
+    .btn {
+        padding: 8px 16px;
+    }
+
+    #pricing input, #pricing select, #pricing button {
+        font-size: 14px;
+    }
+}
+/* Плавная прокрутка */
+html {
+    scroll-behavior: smooth;
+}
+/* Стили для иконок FontAwesome */
+.fas {
+    color: #ff6600; /* Цвет иконок */
+}
+
+.fas:hover {
+    color: #e55d00; /* Цвет иконок при наведении */
+}

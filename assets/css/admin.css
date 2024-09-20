@@ -1,0 +1,114 @@
+/* Общие стили для бокового меню */
+#sidebar {
+    height: 100%;
+    background-color: #f8f9fa;
+    padding-top: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    border-right: 1px solid #dee2e6;
+}
+
+#sidebar .nav-link {
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+}
+
+#sidebar .nav-link.active {
+    color: #007bff;
+    background-color: #e9ecef;
+}
+
+#sidebar .nav-link:hover {
+    color: #0056b3;
+    background-color: #e9ecef;
+}
+
+/* Основные стили для контента */
+main {
+    margin-left: 250px;
+    padding: 2rem;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2;
+}
+
+/* Стили для кнопок */
+.btn {
+    border-radius: 0.25rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Стили для блока статистики */
+#statistics {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    background-color: #ffffff;
+    margin-bottom: 2rem;
+}
+
+.charts-container {
+    display: flex; /* Используем flexbox для расположения графиков */
+    justify-content: space-between; /* Распределяем пространство между графиками */
+}
+
+.chart-container {
+    flex: 1; /* Занимает равное пространство */
+    margin: 0 10px; /* Отступы между графиками */
+    position: relative; /* Для позиционирования канваса */
+    height: 300px; /* Фиксированная высота для графиков */
+    border: 1px solid #dee2e6; /* Рамка вокруг графиков */
+    border-radius: 0.5rem; /* Скругление углов */
+    overflow: hidden; /* Прячем переполнение */
+    background-color: #f9f9f9; /* Фон контейнера графика */
+    display: flex; /* Для центрирования содержимого */
+    align-items: center; /* Вертикальное выравнивание */
+    justify-content: center; /* Горизонтальное выравнивание */
+}
+
+.chart-container canvas {
+    position: relative; /* Позволяет канвасу занимать всю область контейнера */
+    width: 100%; /* Занимает всю ширину контейнера */
+    height: 100%; /* Занимает всю высоту контейнера */
+}
+
+@media (max-width: 768px) {
+    .charts-container {
+        flex-direction: column; /* На мобильных устройствах графики будут в колонку */
+    }
+
+    .chart-container {
+        margin: 0 0 20px; /* Отступ снизу для мобильных устройств */
+    }
+}

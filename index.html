@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прокат летающих тарелок - Калькулятор</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> <!-- Popper.js -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-space-shuttle"></i> Прокат летающих тарелок</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#fleet">Флот</a></li>
+                    <li><a href="#pricing">Заказать</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section id="hero">
+        <div class="container">
+            <h2>Арендуйте уже сегодня!</h2>
+            <a href="#fleet" class="btn">Узнать больше</a>
+        </div>
+    </section>
+    
+    <section id="about">
+        <div class="container">
+            <h2>О нас</h2>
+            <p>Мы межгалактическая компания, специализирующаяся на аренде летающих тарелок для любых нужд. От космических туров до грузоперевозок — мы предоставляем транспорт высшего класса.</p>
+        </div>
+    </section>
+    
+    <section id="fleet">
+        <div class="container">
+            <h2>Наш флот</h2>
+            <div id="fleet-items">
+                <!-- Динамически загруженные товары будут вставлены сюда -->
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <div class="container">
+            <h2>Заказать</h2>
+            <form id="rentalForm">
+                <label for="product">Выберите модель тарелки:</label>
+                <select id="product" name="product">
+                    <!-- Модели тарелок будут загружены динамически -->
+                </select>
+
+                <label for="startDate">Дата начала аренды:</label>
+                <input type="text" id="startDate" name="startDate" required>
+
+                <label for="endDate">Дата окончания аренды:</label>
+                <input type="text" id="endDate" name="endDate" required>
+
+                <p>
+                    Цена за аренду: <span id="totalPriceRUB">0</span> рублей
+                    (<span id="totalPriceCNY" data-toggle="tooltip" title="Цена в юанях">0</span> CNY)
+                </p>
+
+                <button type="button" id="calculateButton" class="btn btn-primary">Рассчитать</button>
+                <button type="button" id="requestButton" class="btn btn-success" style="display:none;">Оставить заявку</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Модальное окно для заявки -->
+    <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="requestModalLabel">Оставить заявку</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="requestForm">
+                        <div class="form-group">
+                            <label for="name">Имя:</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Электронная почта:</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Номер телефона:</label>
+                            <input type="text" id="phone" name="phone" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Оставить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
