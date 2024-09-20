@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    // Загрузка моделей летающих тарелок из базы данных
     $.ajax({
         url: 'App/Presentation/get_items.php',
         method: 'GET',
@@ -7,7 +6,7 @@ $(document).ready(function() {
             var products = JSON.parse(response);
             var $productSelect = $('#product');
 
-            $productSelect.empty(); // Очищаем select перед добавлением опций
+            $productSelect.empty(); 
 
             products.forEach(function(product) {
                 $productSelect.append('<option value="' + product.id + '">' + product.name + '</option>');
@@ -18,7 +17,6 @@ $(document).ready(function() {
         }
     });
 
-    // Инициализация календарей
     $("#startDate").datepicker({
         dateFormat: "yy-mm-dd",
         minDate: 0
@@ -29,13 +27,10 @@ $(document).ready(function() {
         minDate: 1
     });
 
-    // Маска для номера телефона
     $('#phone').mask('+7 (999) 999-9999');
 
-    // Инициализация tooltip
     $('[data-toggle="tooltip"]').tooltip();
 
-    // Обработка клика на кнопку "Рассчитать"
     $('#calculateButton').click(function() {
         calculatePrice();
     });
@@ -73,12 +68,10 @@ $(document).ready(function() {
         }
     }
 
-    // Обработка клика на кнопку "Оставить заявку"
     $('#requestButton').click(function() {
         $('#requestModal').modal('show');
     });
 
-    // Отправка заявки
     $('#requestForm').submit(function(e) {
         e.preventDefault();
 
@@ -115,38 +108,14 @@ $(document).ready(function() {
     });
 });
 
-
-
-
-// Добавим плавную прокрутку по якорям
-document.querySelectorAll('nav ul li a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
-
-
-
-
-
-
-
-
-
-
-
     $(document).ready(function() {
-        // Загрузка данных о тарелках из get_items.php
         $.ajax({
             url: 'App/Presentation/get_items.php',
             method: 'GET',
             dataType: 'json',
             success: function(data) {
                 var fleetItemsContainer = $('#fleet-items');
-                fleetItemsContainer.empty(); // Очистить контейнер перед добавлением новых элементов
+                fleetItemsContainer.empty(); 
 
                 $.each(data, function(index, item) {
                     var fleetItem = '<div class="fleet-item">' +

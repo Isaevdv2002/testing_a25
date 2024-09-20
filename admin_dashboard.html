@@ -1,133 +1,109 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Админка - Панель управления</title>
-    <link rel="stylesheet" href="assets/css/admin.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Боковое меню -->
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light">
-                <div class="position-sticky">
-                    <h4 class="text-center">Админка</h4>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#" data-target="statistics">
-                                <i class="fas fa-tachometer-alt"></i> Статистика
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-target="items">
-                                <i class="fas fa-box-open"></i> Товары
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-target="orders">
-                                <i class="fas fa-shopping-cart"></i> Заказы
-                            </a>
-                        </li>
-                                        <button id="logoutButton" class="btn btn-danger">Выйти</button>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Админка - Панель управления</title>
+		<link rel="stylesheet" href="assets/css/admin.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light">
+					<div class="position-sticky">
+						<h4 class="text-center">Админка</h4>
+						<ul class="nav flex-column">
+							<li class="nav-item">
+								<a class="nav-link active" href="#" data-target="statistics"> <i class="fas fa-tachometer-alt"></i> Статистика </a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#" data-target="items"> <i class="fas fa-box-open"></i> Товары </a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#" data-target="orders"> <i class="fas fa-shopping-cart"></i> Заказы </a>
+							</li>
+							<button id="logoutButton" class="btn btn-danger">Выйти</button>
+						</ul>
+					</div>
+				</nav>
 
-                    </ul>
-                </div>
-            </nav>
+				<main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-4">
+					<h1>Панель управления</h1>
+					<p>Добро пожаловать, <span id="adminName"></span>!</p>
 
-            <!-- Основной контент -->
-            <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-4">
-                <h1>Панель управления</h1>
-                <p>Добро пожаловать, <span id="adminName"></span>!</p>
+					<div id="items" class="section" style="display:none;">
+						<h2>Все товары</h2>
+						<div class="form-group">
+							<label for="searchItem">Поиск товара:</label>
+							<input type="text" id="searchItem" class="form-control" placeholder="Введите название товара" />
+						</div>
+						<button id="addItemButton" class="btn btn-success mb-3">Добавить товар</button>
 
-                <!-- Форма поиска товара -->
-<!-- Товары -->
-<div id="items" class="section" style="display:none;">
-    <h2>Все товары</h2>
-    <div class="form-group">
-        <label for="searchItem">Поиск товара:</label>
-        <input type="text" id="searchItem" class="form-control" placeholder="Введите название товара">
-    </div>
-    <button id="addItemButton" class="btn btn-success mb-3">Добавить товар</button>
+						<div id="addItemForm" style="display:none;">
+							<h3>Добавить новый товар</h3>
+							<form id="newItemForm">
+								<div class="form-group">
+									<label for="itemName">Наименование:</label>
+									<input type="text" id="itemName" name="itemName" class="form-control" required />
+								</div>
+								<div class="form-group">
+									<label for="itemPrice">Цена:</label>
+									<input type="number" id="itemPrice" name="itemPrice" class="form-control" step="0.01" required />
+								</div>
+								<button type="submit" class="btn btn-primary">Сохранить</button>
+								<button type="button" id="cancelAddItem" class="btn btn-secondary">Отмена</button>
+							</form>
+						</div>
 
-    <!-- Форма добавления товара -->
-    <div id="addItemForm" style="display:none;">
-        <h3>Добавить новый товар</h3>
-        <form id="newItemForm">
-            <div class="form-group">
-                <label for="itemName">Наименование:</label>
-                <input type="text" id="itemName" name="itemName" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="itemPrice">Цена:</label>
-                <input type="number" id="itemPrice" name="itemPrice" class="form-control" step="0.01" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Сохранить</button>
-            <button type="button" id="cancelAddItem" class="btn btn-secondary">Отмена</button>
-        </form>
-    </div>
+						<table class="table table-striped mt-3">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Наименование</th>
+									<th>Цена</th>
+								</tr>
+							</thead>
+							<tbody id="itemsTableBody"></tbody>
+						</table>
+					</div>
 
-    <!-- Таблица товаров -->
-    <table class="table table-striped mt-3">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Наименование</th>
-                <th>Цена</th>
-            </tr>
-        </thead>
-        <tbody id="itemsTableBody">
-            <!-- Данные будут загружены через AJAX -->
-        </tbody>
-    </table>
-</div>
+					<div id="statistics" class="section mb-4" style="display: none;">
+						<h2>Статистика</h2>
+						<div class="charts-container d-flex">
+							<div class="chart-container">
+								<canvas id="ordersChart" width="400" height="200"></canvas>
+							</div>
+							<div class="chart-container">
+								<canvas id="itemsChart" width="400" height="200"></canvas>
+							</div>
+						</div>
+					</div>
 
+					<div id="orders" class="section mb-4" style="display: none;">
+						<h2>Список заказов</h2>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Модель</th>
+									<th>Дата начала аренды</th>
+									<th>Дата окончания аренды</th>
+									<th>Цена</th>
+									<th>Телефон</th>
+									<th>Дата создания</th>
+								</tr>
+							</thead>
+							<tbody id="ordersTableBody"></tbody>
+						</table>
+					</div>
+				</main>
+			</div>
+		</div>
 
-
-<!-- Статистика -->
-<!-- Статистика -->
-<div id="statistics" class="section mb-4" style="display: none;">
-    <h2>Статистика</h2>
-    <div class="charts-container d-flex">
-        <div class="chart-container">
-            <canvas id="ordersChart" width="400" height="200"></canvas>
-        </div>
-        <div class="chart-container">
-            <canvas id="itemsChart" width="400" height="200"></canvas>
-        </div>
-    </div>
-</div>
-
-
-                <!-- Заказы -->
-                <div id="orders" class="section mb-4" style="display: none;">
-                    <h2>Список заказов</h2>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Модель</th>
-                                <th>Дата начала аренды</th>
-                                <th>Дата окончания аренды</th>
-                                <th>Цена</th>
-                                <th>Телефон</th>
-                                <th>Дата создания</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ordersTableBody">
-                            <!-- Данные будут загружены через AJAX -->
-                        </tbody>
-                    </table>
-                </div>
-
-            </main>
-        </div>
-    </div>
-
-    <script src="assets/js/admin_dashboard.js"></script>
-</body>
+		<script src="assets/js/admin_dashboard.js"></script>
+	</body>
 </html>

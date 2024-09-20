@@ -1,11 +1,10 @@
 $(document).ready(function() {
-    // Проверяем, вошел ли пользователь
     $.ajax({
         url: 'App/Application/check_session.php',
         method: 'GET',
         success: function(response) {
             if (response.trim() === 'loggedin') {
-                $('#adminName').text('Admin'); // Вы можете заменить 'Admin' на имя администратора
+                $('#adminName').text('Admin');
             } else {
                 window.location.href = 'admin.html';
             }
@@ -79,7 +78,7 @@ $(document).ready(function() {
             success: function(response) {
                 var data = JSON.parse(response);
                 var itemsTableBody = $('#itemsTableBody');
-                itemsTableBody.empty(); // Очистить таблицу перед добавлением новых данных
+                itemsTableBody.empty();
 
                 data.forEach(function(item) {
                     itemsTableBody.append(
@@ -127,7 +126,7 @@ $(document).ready(function() {
                         },
                         success: function(response) {
                             if (response === 'success') {
-                                loadItems(); // Перезагрузить список товаров
+                                loadItems(); 
                                 alert('Товар успешно изменен');
                             } else {
                                 alert('Ошибка при изменении товара');
@@ -146,7 +145,7 @@ $(document).ready(function() {
                             data: { id: itemId },
                             success: function(response) {
                                 if (response === 'success') {
-                                    loadItems(); // Перезагрузить список товаров
+                                    loadItems(); 
                                 } else {
                                     alert('Ошибка при удалении товара');
                                 }
@@ -160,7 +159,7 @@ $(document).ready(function() {
 
     // Обработка добавления нового товара
     $('#addItemButton').click(function() {
-        $('#addItemForm').toggle(); // Показать/скрыть форму добавления товара
+        $('#addItemForm').toggle(); 
     });
 
     $('#newItemForm').submit(function(e) {
@@ -171,8 +170,8 @@ $(document).ready(function() {
             data: $(this).serialize(),
             success: function(response) {
                 if (response === 'success') {
-                    loadItems(); // Перезагрузить список товаров
-                    $('#addItemForm').hide(); // Скрыть форму
+                    loadItems(); 
+                    $('#addItemForm').hide();
                 } else {
                     alert('Ошибка при добавлении товара');
                 }
@@ -181,7 +180,7 @@ $(document).ready(function() {
     });
 
     $('#cancelAddItem').click(function() {
-        $('#addItemForm').hide(); // Скрыть форму
+        $('#addItemForm').hide(); 
     });
 
     // Обработка выхода из админки
@@ -199,10 +198,10 @@ $(document).ready(function() {
     $('#sidebar .nav-link').click(function(e) {
         e.preventDefault();
         var target = $(this).data('target');
-        $('.section').hide(); // Скрыть все секции
-        $('#' + target).show(); // Показать выбранную секцию
-        $('#sidebar .nav-link').removeClass('active'); // Удалить активный класс
-        $(this).addClass('active'); // Добавить активный класс к выбранному элементу
+        $('.section').hide(); 
+        $('#' + target).show();
+        $('#sidebar .nav-link').removeClass('active'); 
+        $(this).addClass('active'); 
     });
 });
 
@@ -232,15 +231,15 @@ $(document).ready(function() {
                 var data = JSON.parse(response);
 
                 var labels = data.map(function(item) {
-                    return item.name; // Названия товаров
+                    return item.name; 
                 });
                 var counts = data.map(function(item) {
-                    return item.rentals; // Количество заказов
+                    return item.rentals; 
                 });
 
                 var ctx = document.getElementById('itemsChart').getContext('2d');
                 new Chart(ctx, {
-                    type: 'pie', // Круговая диаграмма
+                    type: 'pie', 
                     data: {
                         labels: labels,
                         datasets: [{

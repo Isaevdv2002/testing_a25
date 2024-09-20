@@ -79,36 +79,36 @@ h2 {
 }
 
 .charts-container {
-    display: flex; /* Используем flexbox для расположения графиков */
-    justify-content: space-between; /* Распределяем пространство между графиками */
+    display: flex; 
+    justify-content: space-between; 
 }
 
 .chart-container {
-    flex: 1; /* Занимает равное пространство */
-    margin: 0 10px; /* Отступы между графиками */
-    position: relative; /* Для позиционирования канваса */
-    height: 300px; /* Фиксированная высота для графиков */
-    border: 1px solid #dee2e6; /* Рамка вокруг графиков */
-    border-radius: 0.5rem; /* Скругление углов */
-    overflow: hidden; /* Прячем переполнение */
-    background-color: #f9f9f9; /* Фон контейнера графика */
-    display: flex; /* Для центрирования содержимого */
-    align-items: center; /* Вертикальное выравнивание */
-    justify-content: center; /* Горизонтальное выравнивание */
+    flex: 1; 
+    margin: 0 10px; 
+    position: relative; 
+    height: 300px;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem; 
+    overflow: hidden; 
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
 }
 
 .chart-container canvas {
-    position: relative; /* Позволяет канвасу занимать всю область контейнера */
-    width: 100%; /* Занимает всю ширину контейнера */
-    height: 100%; /* Занимает всю высоту контейнера */
+    position: relative; 
+    width: 100%; 
+    height: 100%; 
 }
 
 @media (max-width: 768px) {
     .charts-container {
-        flex-direction: column; /* На мобильных устройствах графики будут в колонку */
+        flex-direction: column;
     }
 
     .chart-container {
-        margin: 0 0 20px; /* Отступ снизу для мобильных устройств */
+        margin: 0 0 20px;
     }
 }
