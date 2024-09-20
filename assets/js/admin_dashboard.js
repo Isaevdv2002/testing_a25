@@ -140,7 +140,7 @@ $(document).ready(function() {
 
                     if (confirm('Вы точно хотите удалить товар?')) {
                         $.ajax({
-                            url: 'App/Presentation/delete_item.php',
+                            url: 'App/Application/delete_item.php',
                             method: 'POST',
                             data: { id: itemId },
                             success: function(response) {
