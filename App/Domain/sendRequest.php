@@ -14,31 +14,35 @@ require '../Infrastructure/PHPMailer/src/SMTP.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = $_POST['phone'];
+    $name = $_POST['name']; 
+    $email = $_POST['email']; 
     $productId = $_POST['productId'];
     $startDate = $_POST['startDate'];
     $endDate = $_POST['endDate'];
+    $adapter = new DataAdapter($conn);
+    $productData = $adapter->getProductData($productId);
 
-    // Пример расчета стоимости
-    $pricePerDay = 100; // Установите реальную цену за день
+    if (!$productData) {
+        echo 'Ошибка: продукт не найден.';
+        exit;
+    }
+
+    $productName = $productData['name'] ?? 'Неизвестно';
+    $pricePerDay = $productData['price'] ?? 100; 
+
     $startDateTimestamp = strtotime($startDate);
     $endDateTimestamp = strtotime($endDate);
     $days = ($endDateTimestamp - $startDateTimestamp) / (60 * 60 * 24);
+
+    if ($days <= 0) {
+        echo 'Ошибка: неверные даты.';
+        exit;
+    }
+
     $totalPrice = $days * $pricePerDay;
 
-    // Отладочные сообщения
-    echo "Product ID: $productId<br>";
-    echo "Start Date: $startDate<br>";
-    echo "End Date: $endDate<br>";
-    echo "Total Price: $totalPrice<br>";
-    echo "Phone: $phone<br>";
-
-    $adapter = new DataAdapter($conn);
-    $productData = $adapter->getProductData($productId);
-    $productName = $productData['name'] ?? 'Неизвестно';
-
-    // Запись заказа в базу данных
-    $stmt = $conn->prepare("INSERT INTO orders (product_id, start_date, end_date, total_price, phone) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("issss", $productId, $startDate, $endDate, $totalPrice, $phone);
+    $stmt = $conn->prepare("INSERT INTO orders (product_id, start_date, end_date, total_price, phone, name, email) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("issssss", $productId, $startDate, $endDate, $totalPrice, $phone, $name, $email);
     
     if (!$stmt->execute()) {
         echo 'Ошибка при записи заказа: ' . $stmt->error;
@@ -46,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $stmt->close();
 
-    // Отправка письма
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
@@ -59,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->CharSet = 'UTF-8';
 
         $mail->setFrom('zayavka_s_sayta01@mail.ru', 'CRM ensoez');
-        $mail->addAddress('i.isaeww27@gmail.com'); // Замените на почту менеджера
+        $mail->addAddress('i.isaeww27@gmail.com'); 
 
         $mail->isHTML(true);
         $mail->Subject = 'Новая заявка на прокат летающей тарелки';
@@ -68,7 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                           Дата начала аренды: $startDate<br>
                           Дата окончания аренды: $endDate<br>
                           Цена: $totalPrice кредитов<br>
-                          Номер телефона: $phone";
+                          Номер телефона: $phone<br>
+                          Имя: $name<br>
+                          Email: $email";
 
         $mail->send();
         echo 'success';
@@ -76,4 +81,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo 'Ошибка: ', $mail->ErrorInfo;
     }
 }
+
 ?>

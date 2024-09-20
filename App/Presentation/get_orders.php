@@ -1,7 +1,7 @@
 <?php
 require '../Infrastructure/db.php'; 
 
-$stmt = $conn->prepare("SELECT o.id, p.name AS product_name, o.start_date, o.end_date, o.total_price, o.phone, o.created_at 
+$stmt = $conn->prepare("SELECT o.id, p.name AS product_name, o.start_date, o.end_date, o.total_price, o.phone, o.name AS customer_name, o.email, o.created_at 
                          FROM orders o 
                          JOIN products p ON o.product_id = p.id");
 $stmt->execute();
@@ -16,14 +16,15 @@ if ($result->num_rows > 0) {
                 <td>{$row['end_date']}</td>
                 <td>{$row['total_price']}</td>
                 <td>{$row['phone']}</td>
+                <td>{$row['customer_name']}</td>
+                <td>{$row['email']}</td>
                 <td>{$row['created_at']}</td>
               </tr>";
     }
 } else {
-    echo "<tr><td colspan='7'>Нет заказов</td></tr>";
+    echo "<tr><td colspan='9'>Нет заказов</td></tr>";
 }
 
 $stmt->close();
 $conn->close();
-
 ?>
