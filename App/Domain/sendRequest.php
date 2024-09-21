@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->Port = 465;
         $mail->CharSet = 'UTF-8';
 
-        $mail->setFrom('zayavka_s_sayta01@mail.ru', 'CRM ensoez');
+        $mail->setFrom('zayavka_s_sayta01@mail.ru', 'Zayavka');
         $mail->addAddress('i.isaeww27@gmail.com'); 
 
         $mail->isHTML(true);
